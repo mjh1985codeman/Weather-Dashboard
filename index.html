@@ -17,15 +17,26 @@
     <header class="container-fluid bg-primary">
       <h1>Weather Dashboard</h1>
     </header>
-    <main class="container-fluid row">
+    <div class="container-fluid">  <!-- div to hold city search and current city display in one container -->
       <!-- City Search Section  -->
       <div class="container-fluid">
         <h2>Search for a City:</h2>
         <form>
-          <input type="text" />
-          <button class="btn" id="CitySearchButton">Search</button>
+          <input id="citysearchinputText"type="text" />
+        
+          <div class="searchButton">
+          <button id="CitySearchButton" class="btn btn-primary" type="submit">SEARCH</button>
+          </div>
           <div id="CitySearchHistoryList"></div>
         </form>
+      </div>
+      <!-- City Search History Section   -->
+      <div class="list-group col">
+        <button type="button" class="list-group-item" style="max-width: 18rem;">Prior City</button>
+        <button type="button" class="hide list-group-item" style="max-width: 18rem;">Prior City</button>
+        <button type="button" class="hide list-group-item" style="max-width: 18rem;">Prior City</button>
+        <button type="button" class="hide list-group-item" style="max-width: 18rem;">Prior City</button>
+        
       </div>
       <!-- Current City Display Section -->
       <div id="current-city-display">
@@ -34,6 +45,7 @@
         <p id="current-city-wind">Wind:</p>
         <p id="current-city-humidity">Humidity:</p>
         <p id="current-city-uvindex">UV Index:</p>
+      </div>
       </div>
       <!-- 5 day forecast section -->
       <div class="row">
@@ -81,7 +93,7 @@
       </div>
 
       </div>
-    </main>
+    
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

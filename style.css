@@ -8,3 +8,11 @@ header {
     display: flex;
     justify-content: center;
 }
+
+.hide {
+    display: none;
+}
+
+.searchButton {
+    padding: 10px;
+}
