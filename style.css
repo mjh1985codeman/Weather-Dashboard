@@ -1,0 +1,10 @@
+body {
+    background-color: hsl(240, 19%, 82%)
+}
+
+header {
+    font-size: 26px;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
