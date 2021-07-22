@@ -20,7 +20,11 @@ function searchCurrentCity(city) {
       console.log(data);
       // drills down to get the city and state name.
       console.log(data[0].name);
+      document.getElementById("current-city-name").innerHTML +=
+        " " + data[0].name;
       console.log(data[0].state);
+      document.getElementById("current-city-state").innerHTML +=
+        " " + data[0].state;
     });
 }
 
