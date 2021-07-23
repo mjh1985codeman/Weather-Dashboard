@@ -25,6 +25,7 @@ function searchCurrentCity(city) {
       console.log(data[0].state);
       document.getElementById("current-city-state").innerHTML +=
         " " + data[0].state;
+      // created lat and lon variables.
       var lat = data[0].lat;
       var lon = data[0].lon;
       // search for the api to get the current weather of the city that is searched.
@@ -49,7 +50,40 @@ function searchCurrentCity(city) {
           document.getElementById("current-city-humidity").innerHTML +=
             " " + data.main.humidity;
         });
+
+      //get UV index
+      fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}
+        `)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          console.log(data.current.uvi);
+          document.getElementById("current-city-uvindex").innerHTML +=
+            " " + data.current.uvi;
+        });
+
+      // getting the 5 Day forecast
+      fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}
+        `)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          fiveDayForecast(data);
+        });
     });
+}
+
+// created function to get the five day forecast.
+function fiveDayForecast(forecastResponse) {
+  //variable to display the forecastResponse list which had 40 items.
+  var forecastArray = forecastResponse.list;
+  // for loop to start at index 4 (Noon hour of each day) and for the length of the array (40 items)
+  // increment by 8 to get the 12th hour conditions for each day of the 5 day forecast.
+  for (var i = 4; i < forecastArray.length; i += 8) {
+    console.log(forecastArray[i]);
+  }
 }
 
 // Function that gets ran whent the search button is clicked to pass the city input into the api url.
