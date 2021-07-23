@@ -2,9 +2,15 @@
 var apiKey = "74711516f5fae5b0413ec705cb27b3dc";
 var searchButton = document.getElementById("CitySearchButton");
 var currentCitySearchInputText = document.getElementById("citySearchInputText");
+var fiveDayForecastContEl = document.getElementById("five-day-forecast-cont");
 
 //Event Listner for Search Button
 searchButton.addEventListener("click", handleSearchInput);
+searchButton.addEventListener("click", showFiveDayForecast);
+
+function showFiveDayForecast() {
+  fiveDayForecastContEl.removeAttribute("class", "hide");
+}
 
 // Api Variable to the current City, State, Lat and Lon for the city that is entered into the
 // search box.
@@ -17,12 +23,12 @@ function searchCurrentCity(city) {
     })
     .then(function (data) {
       // pulls the array of objects via the api call.
-      console.log(data);
+      //console.log(data);
       // drills down to get the city and state name.
-      console.log(data[0].name);
+      //console.log(data[0].name);
       document.getElementById("current-city-name").innerHTML =
         " " + data[0].name;
-      console.log(data[0].state);
+      //console.log(data[0].state);
       document.getElementById("current-city-state").innerHTML =
         " " + data[0].state;
       // created lat and lon variables.
@@ -36,17 +42,17 @@ function searchCurrentCity(city) {
           return response.json();
         })
         .then(function (data) {
-          console.log(data);
+          //console.log(data);
           //current Temp
-          console.log(data.main.temp);
+          //console.log(data.main.temp);
           document.getElementById("current-city-temp").innerHTML =
-            "Temp: " + data.main.temp + " degrees.";
+            "Temp: " + data.main.temp + " °F";
           //current Wind
-          console.log(data.wind.speed);
+          //console.log(data.wind.speed);
           document.getElementById("current-city-wind").innerHTML =
-            "Wind: " + data.wind.speed + " mph.";
+            "Wind: " + data.wind.speed + " mph";
           //current Humidity
-          console.log(data.main.humidity);
+          //console.log(data.main.humidity);
           document.getElementById("current-city-humidity").innerHTML =
             "Humidity: " + data.main.humidity;
         });
@@ -58,7 +64,7 @@ function searchCurrentCity(city) {
           return response.json();
         })
         .then(function (data) {
-          console.log(data.current.uvi);
+          //console.log(data.current.uvi);
           document.getElementById("current-city-uvindex").innerHTML =
             "UV Index: " + data.current.uvi;
         });
@@ -82,7 +88,10 @@ function fiveDayForecast(forecastResponse) {
   // for loop to start at index 4 (Noon hour of each day) and for the length of the array (40 items)
   // increment by 8 to get the 12th hour conditions for each day of the 5 day forecast.
   for (var i = 4; i < forecastArray.length; i += 8) {
-    console.log(forecastArray[i]);
+    console.log(forecastArray[i].main.temp);
+    console.log(forecastArray[i].wind.speed);
+    console.log(forecastArray[i].main.humidity);
+    // lets see if this works
   }
 }
 
