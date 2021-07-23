@@ -134,12 +134,6 @@ function fiveDayForecast(forecastResponse) {
   // increment by 8 to get the 12th hour conditions for each day of the 5 day forecast.
   var foreCastItemsArray = [];
   for (var i = 4; i < forecastArray.length; i += 8) {
-    console.log(forecastArray[i]);
-    //console.log(forecastArray[i].main.temp);
-    //console.log(forecastArray[i].wind.speed);
-    //console.log(forecastArray[i].main.humidity);
-    //console.log(forecastArray[i].weather[0].icon);
-
     var foreCastItem = {
       temp: forecastArray[i].main.temp,
       wind: forecastArray[i].wind.speed,
@@ -147,11 +141,10 @@ function fiveDayForecast(forecastResponse) {
       icon: forecastArray[i].weather[0].icon,
     };
     foreCastItemsArray.push(foreCastItem);
-    // lets see if this works
-    //console.log(foreCastItemsArray);
-    // lets keep going.
-    // day one:
   }
+
+  //icon variable.
+
   console.log(foreCastItemsArray);
   // Created For Loop to iterate over the foreCastItemsArray to get each day(s) value(s)
   for (var i = 0; i < foreCastItemsArray.length; i++) {
@@ -162,6 +155,16 @@ function fiveDayForecast(forecastResponse) {
       "Wind: " + foreCastItemsArray[i].wind + " mph.";
     document.getElementById("fivedaycardhumidity" + i).innerHTML =
       "Humidity: " + foreCastItemsArray[i].humidity + "%";
+    //document.createElementById(
+    //"fivedaycardicon" + i
+    //).innerHTML =
+    var fiveDayWeatherIcon = foreCastItemsArray[i].icon;
+    console.log(fiveDayWeatherIcon);
+    var fiveDayWeatherIconURL =
+      "http://openweathermap.org/img/wn/" + fiveDayWeatherIcon + ".png";
+
+    document.getElementById("fivedaycardicon" + i).innerHTML =
+      fiveDayWeatherIconURL;
   }
 }
 
