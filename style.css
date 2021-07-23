@@ -48,9 +48,9 @@ header {
 }
 
 .savedCityButtons {
-    background-color: blue;
-    color: white;
-    border: solid 1px gray;
+    background-color: rgb(236, 165, 132);
+    color:black;
+    border: solid 2px gray;
     border-radius: 45px;
     max-width: 18rem;
     margin: 5px;
