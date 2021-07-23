@@ -20,10 +20,10 @@ function searchCurrentCity(city) {
       console.log(data);
       // drills down to get the city and state name.
       console.log(data[0].name);
-      document.getElementById("current-city-name").innerHTML +=
+      document.getElementById("current-city-name").innerHTML =
         " " + data[0].name;
       console.log(data[0].state);
-      document.getElementById("current-city-state").innerHTML +=
+      document.getElementById("current-city-state").innerHTML =
         " " + data[0].state;
       // created lat and lon variables.
       var lat = data[0].lat;
@@ -39,16 +39,16 @@ function searchCurrentCity(city) {
           console.log(data);
           //current Temp
           console.log(data.main.temp);
-          document.getElementById("current-city-temp").innerHTML +=
-            " " + data.main.temp + " degrees.";
+          document.getElementById("current-city-temp").innerHTML =
+            "Temp: " + data.main.temp + " degrees.";
           //current Wind
           console.log(data.wind.speed);
-          document.getElementById("current-city-wind").innerHTML +=
-            " " + data.wind.speed + " mph.";
+          document.getElementById("current-city-wind").innerHTML =
+            "Wind: " + data.wind.speed + " mph.";
           //current Humidity
           console.log(data.main.humidity);
-          document.getElementById("current-city-humidity").innerHTML +=
-            " " + data.main.humidity;
+          document.getElementById("current-city-humidity").innerHTML =
+            "Humidity: " + data.main.humidity;
         });
 
       //get UV index
@@ -59,8 +59,8 @@ function searchCurrentCity(city) {
         })
         .then(function (data) {
           console.log(data.current.uvi);
-          document.getElementById("current-city-uvindex").innerHTML +=
-            " " + data.current.uvi;
+          document.getElementById("current-city-uvindex").innerHTML =
+            "UV Index: " + data.current.uvi;
         });
 
       // getting the 5 Day forecast
