@@ -17,7 +17,8 @@
     <header class="container-fluid bg-primary">
       <h1>Weather Dashboard</h1>
     </header>
-    <div class="container-fluid">  <!-- div to hold city search and current city display in one container -->
+    <div class="container-fluid row-cols-2">  <!-- div to hold city search and current city display in one container -->
+      <div id = "searched-city-buttons" class="list-group col"></div>
       <!-- City Search Section  -->
       <div class="container-fluid">
         <h2>Search for a City:</h2>
@@ -31,26 +32,19 @@
         </form>
       </div>
       <!-- City Search History Section   -->
-      <div class="list-group col">
-        <button type="button" class="hide list-group-item" style="max-width: 18rem;">Prior City</button>
-        <button type="button" class="hide list-group-item" style="max-width: 18rem;">Prior City</button>
-        <button type="button" class="hide list-group-item" style="max-width: 18rem;">Prior City</button>
-        <button type="button" class="hide list-group-item" style="max-width: 18rem;">Prior City</button>
-        
-      </div>
       <!-- Current City Display Section -->
       <div id="current-city-display">
         <div class="container-fluid">
-        <h3 id=current-date></h3>
-        <h3 id="current-city-name"></h3>
-        <h4 id="current-city-state"></h4>
-      </div>
+          <h3 id=current-date></h3>
+          <h3 id="current-city-name"></h3>
+          <h4 id="current-city-state"></h4>
+        </div>
         <p id="current-city-temp"></p>
         <p id="current-city-wind"></p>
         <p id="current-city-humidity"></p>
         <p id="current-city-uvindex"></p>
       </div>
-      </div>
+    </div>
       <!-- 5 day forecast section -->
     <div id="five-day-forecast-cont"class="hide" >
       <div class="row">

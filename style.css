@@ -46,3 +46,12 @@ header {
     max-width: fit-content;
     color: black;
 }
+
+.savedCityButtons {
+    background-color: blue;
+    color: white;
+    border: solid 1px gray;
+    border-radius: 45px;
+    max-width: 18rem;
+    margin: 5px;
+}

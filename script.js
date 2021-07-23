@@ -3,8 +3,11 @@ var apiKey = "74711516f5fae5b0413ec705cb27b3dc";
 var searchButton = document.getElementById("CitySearchButton");
 var currentCitySearchInputText = document.getElementById("citySearchInputText");
 var fiveDayForecastContEl = document.getElementById("five-day-forecast-cont");
+var savedCityButtonEl = document.getElementById("searched-city-buttons");
 var uvIndexEl = document.getElementById("current-city-uvindex");
 var nextFiveDayDates = [];
+//variable for local storage
+var savedSearches = [];
 
 //Event Listner for Search Button
 searchButton.addEventListener("click", handleSearchInput);
@@ -60,6 +63,10 @@ function searchCurrentCity(city) {
       // created lat and lon variables.
       var lat = data[0].lat;
       var lon = data[0].lon;
+      // save the lat, lon and city of the searched city name in local storage.
+      localStorage.setItem("lat", JSON.stringify(lat));
+      localStorage.setItem("lon", JSON.stringify(lon));
+      localStorage.setItem("city", JSON.stringify(city));
       // search for the api to get the current weather of the city that is searched.
       fetch(
         `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
@@ -168,3 +175,17 @@ function handleSearchInput(e) {
   searchCurrentCity(searchedCity);
   //console.log(searchedCity);
 }
+
+// function to create buttons from local Storage.
+function getSavedCities() {
+  var savedCityName = JSON.parse(localStorage.getItem("city"));
+  console.log(savedCityName);
+  var savedCityButton = document.createElement("button");
+  savedCityButton.textContent = savedCityName;
+  savedCityButton.classList.add("savedCityButtons");
+  savedCityButtonEl.appendChild(savedCityButton);
+}
+// get the values for Saved Cities from Local Storage and create Buttons.
+window.onload = function () {
+  getSavedCities();
+};
