@@ -16,3 +16,33 @@ header {
 .searchButton {
     padding: 10px;
 }
+
+.low {
+    background-color: green;
+    max-width: fit-content;
+    color: white;
+}
+
+.moderate {
+    background-color: yellow;
+    max-width: fit-content;
+    color: blue;
+}
+
+.high {
+    background-color: orange;
+    max-width: fit-content;
+    color: black;
+}
+
+.very-high {
+    background-color: red;
+    max-width: fit-content;
+    color: white;
+}
+
+.extreme {
+    background-color: violet;
+    max-width: fit-content;
+    color: black;
+}

@@ -3,6 +3,7 @@ var apiKey = "74711516f5fae5b0413ec705cb27b3dc";
 var searchButton = document.getElementById("CitySearchButton");
 var currentCitySearchInputText = document.getElementById("citySearchInputText");
 var fiveDayForecastContEl = document.getElementById("five-day-forecast-cont");
+var uvIndexEl = document.getElementById("current-city-uvindex");
 var nextFiveDayDates = [];
 
 //Event Listner for Search Button
@@ -13,6 +14,8 @@ searchButton.addEventListener("click", getNextFiveDays);
 function showFiveDayForecast() {
   fiveDayForecastContEl.removeAttribute("class", "hide");
 }
+
+//uvIndexEl.setAttribute("class", "low");
 
 //function to get the next five dates.
 function getNextFiveDays() {
@@ -90,6 +93,18 @@ function searchCurrentCity(city) {
           //console.log(data.current.uvi);
           document.getElementById("current-city-uvindex").innerHTML =
             "UV Index: " + data.current.uvi;
+          // if else statemt to color code uv index.
+          if (data.current.uvi < 3) {
+            uvIndexEl.setAttribute("class", "low");
+          } else if (data.current.uvi >= 3 && data.current.uvi < 6) {
+            uvIndexEl.setAttribute("class", "moderate");
+          } else if (data.current.uvi >= 6 && data.current.uvi < 8) {
+            uvIndexEl.setAttribute("class", "high");
+          } else if (data.current.uvi >= 8 && data.current.uvi < 11) {
+            uvIndexEl.setAttribute("class", "very-high");
+          } else {
+            uvIndexEl.setAttribute("class", "extreme");
+          }
         });
 
       // getting the 5 Day forecast
