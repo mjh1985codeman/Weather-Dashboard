@@ -3,13 +3,36 @@ var apiKey = "74711516f5fae5b0413ec705cb27b3dc";
 var searchButton = document.getElementById("CitySearchButton");
 var currentCitySearchInputText = document.getElementById("citySearchInputText");
 var fiveDayForecastContEl = document.getElementById("five-day-forecast-cont");
+var nextFiveDayDates = [];
 
 //Event Listner for Search Button
 searchButton.addEventListener("click", handleSearchInput);
 searchButton.addEventListener("click", showFiveDayForecast);
+searchButton.addEventListener("click", getNextFiveDays);
 
 function showFiveDayForecast() {
   fiveDayForecastContEl.removeAttribute("class", "hide");
+}
+
+//function to get the next five dates.
+function getNextFiveDays() {
+  for (i = 0; i < 6; i++) {
+    nextFiveDayDates[i] = moment().add(i, "days").format("M/DD/YYYY");
+  }
+  document.getElementById("fivedaycarddateONE").innerHTML =
+    " " + nextFiveDayDates[1];
+  document.getElementById("fivedaycarddateTWO").innerHTML =
+    " " + nextFiveDayDates[2];
+  document.getElementById("fivedaycarddateTHREE").innerHTML =
+    " " + nextFiveDayDates[3];
+  document.getElementById("fivedaycarddateFOUR").innerHTML =
+    " " + nextFiveDayDates[4];
+  document.getElementById("fivedaycarddateFIVE").innerHTML =
+    " " + nextFiveDayDates[5];
+
+  // write the current date to the Current City Search
+  document.getElementById("current-date").innerHTML =
+    "(" + nextFiveDayDates[0] + ")";
 }
 
 // Api Variable to the current City, State, Lat and Lon for the city that is entered into the
@@ -54,7 +77,7 @@ function searchCurrentCity(city) {
           //current Humidity
           //console.log(data.main.humidity);
           document.getElementById("current-city-humidity").innerHTML =
-            "Humidity: " + data.main.humidity;
+            "Humidity: " + data.main.humidity + "%";
         });
 
       //get UV index
@@ -88,9 +111,11 @@ function fiveDayForecast(forecastResponse) {
   // for loop to start at index 4 (Noon hour of each day) and for the length of the array (40 items)
   // increment by 8 to get the 12th hour conditions for each day of the 5 day forecast.
   for (var i = 4; i < forecastArray.length; i += 8) {
+    console.log(forecastArray[i]);
     console.log(forecastArray[i].main.temp);
     console.log(forecastArray[i].wind.speed);
     console.log(forecastArray[i].main.humidity);
+    console.log(forecastArray[i].weather[0].icon);
     // lets see if this works
   }
 }

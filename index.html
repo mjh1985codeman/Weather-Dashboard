@@ -40,8 +40,11 @@
       </div>
       <!-- Current City Display Section -->
       <div id="current-city-display">
+        <div class="container-fluid">
+        <h3 id=current-date></h3>
         <h3 id="current-city-name"></h3>
         <h4 id="current-city-state"></h4>
+      </div>
         <p id="current-city-temp"></p>
         <p id="current-city-wind"></p>
         <p id="current-city-humidity"></p>
@@ -53,7 +56,7 @@
       <div class="row">
           <h3>5 Day Forecast:</h3>
           <div class="card border-info mb-3" style="max-width: 13rem;">
-            <div id="fivedaycarddateONE" class="card-header">Date</div>
+            <div id="fivedaycarddateONE" class="card-header"></div>
             <div class="card-body">
               <h6 id="fivedaycardtempONE"class="card-text">Temp:</h6>
               <h6 id="fivedaycardwindONE"class="card-text">Wind:</h6>
@@ -61,7 +64,7 @@
             </div>
           </div>
           <div class="card border-info mb-3" style="max-width: 13rem;">
-            <div id="fivedaycarddateTWO" class="card-header">Date</div>
+            <div id="fivedaycarddateTWO" class="card-header"></div>
             <div class="card-body">
               <h6 id="fivedaycardtempTWO"class="card-text">Temp:</h6>
               <h6 id="fivedaycardwindTWO"class="card-text">Wind:</h6>
@@ -69,7 +72,7 @@
             </div>
           </div>
           <div class="card border-info mb-3" style="max-width: 13rem;">
-            <div id="fivedaycarddateTHREE" class="card-header">Date</div>
+            <div id="fivedaycarddateTHREE" class="card-header"></div>
             <div class="card-body">
               <h6 id="fivedaycardtempTHREE"class="card-text">Temp:</h6>
               <h6 id="fivedaycardwindTHREE"class="card-text">Wind:</h6>
@@ -77,7 +80,7 @@
             </div>
           </div>
           <div class="card border-info mb-3" style="max-width: 13rem;">
-            <div id="fivedaycarddateFOUR" class="card-header">Date</div>
+            <div id="fivedaycarddateFOUR" class="card-header"></div>
             <div class="card-body">
               <h6 id="fivedaycardtempFOUR"class="card-text">Temp:</h6>
               <h6 id="fivedaycardwindFOUR"class="card-text">Wind:</h6>
@@ -85,7 +88,7 @@
             </div>
           </div>
           <div class="card border-info mb-3" style="max-width: 13rem;">
-            <div id="fivedaycarddateFIVE" class="card-header">Date</div>
+            <div id="fivedaycarddateFIVE" class="card-header"></div>
             <div class="card-body">
               <h6 id="fivedaycardtempFIVE"class="card-text">Temp:</h6>
               <h6 id="fivedaycardwindFIVE"class="card-text">Wind:</h6>
@@ -101,6 +104,7 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>
