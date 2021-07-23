@@ -19,15 +19,15 @@ function getNextFiveDays() {
   for (i = 0; i < 6; i++) {
     nextFiveDayDates[i] = moment().add(i, "days").format("M/DD/YYYY");
   }
-  document.getElementById("fivedaycarddateONE").innerHTML =
+  document.getElementById("fivedaycarddate0").innerHTML =
     " " + nextFiveDayDates[1];
-  document.getElementById("fivedaycarddateTWO").innerHTML =
+  document.getElementById("fivedaycarddate1").innerHTML =
     " " + nextFiveDayDates[2];
-  document.getElementById("fivedaycarddateTHREE").innerHTML =
+  document.getElementById("fivedaycarddate2").innerHTML =
     " " + nextFiveDayDates[3];
-  document.getElementById("fivedaycarddateFOUR").innerHTML =
+  document.getElementById("fivedaycarddate3").innerHTML =
     " " + nextFiveDayDates[4];
-  document.getElementById("fivedaycarddateFIVE").innerHTML =
+  document.getElementById("fivedaycarddate4").innerHTML =
     " " + nextFiveDayDates[5];
 
   // write the current date to the Current City Search
@@ -110,13 +110,36 @@ function fiveDayForecast(forecastResponse) {
   var forecastArray = forecastResponse.list;
   // for loop to start at index 4 (Noon hour of each day) and for the length of the array (40 items)
   // increment by 8 to get the 12th hour conditions for each day of the 5 day forecast.
+  var foreCastItemsArray = [];
   for (var i = 4; i < forecastArray.length; i += 8) {
     console.log(forecastArray[i]);
-    console.log(forecastArray[i].main.temp);
-    console.log(forecastArray[i].wind.speed);
-    console.log(forecastArray[i].main.humidity);
-    console.log(forecastArray[i].weather[0].icon);
+    //console.log(forecastArray[i].main.temp);
+    //console.log(forecastArray[i].wind.speed);
+    //console.log(forecastArray[i].main.humidity);
+    //console.log(forecastArray[i].weather[0].icon);
+
+    var foreCastItem = {
+      temp: forecastArray[i].main.temp,
+      wind: forecastArray[i].wind.speed,
+      humidity: forecastArray[i].main.humidity,
+      icon: forecastArray[i].weather[0].icon,
+    };
+    foreCastItemsArray.push(foreCastItem);
     // lets see if this works
+    //console.log(foreCastItemsArray);
+    // lets keep going.
+    // day one:
+  }
+  console.log(foreCastItemsArray);
+  // Created For Loop to iterate over the foreCastItemsArray to get each day(s) value(s)
+  for (var i = 0; i < foreCastItemsArray.length; i++) {
+    //console.log(card);
+    document.getElementById("fivedaycardtemp" + i).innerHTML =
+      "Temp: " + foreCastItemsArray[i].temp + " °F";
+    document.getElementById("fivedaycardwind" + i).innerHTML =
+      "Wind: " + foreCastItemsArray[i].wind + " mph.";
+    document.getElementById("fivedaycardhumidity" + i).innerHTML =
+      "Humidity: " + foreCastItemsArray[i].humidity + "%";
   }
 }
 
