@@ -20,7 +20,7 @@ function showFiveDayForecast() {
 
 //uvIndexEl.setAttribute("class", "low");
 
-//function to get the next five dates.
+//function to get the next five dates via moment.js.
 function getNextFiveDays() {
   for (i = 0; i < 6; i++) {
     nextFiveDayDates[i] = moment().add(i, "days").format("M/DD/YYYY");
@@ -52,9 +52,7 @@ function searchCurrentCity(city) {
     })
     .then(function (data) {
       // pulls the array of objects via the api call.
-      //console.log(data);
       // drills down to get the city and state name.
-      //console.log(data[0].name);
       document.getElementById("current-city-name").innerHTML =
         " " + data[0].name;
       //console.log(data[0].state);
@@ -65,9 +63,31 @@ function searchCurrentCity(city) {
       var lon = data[0].lon;
 
       // save the lat, lon and city of the searched city name in local storage.
+      // ****************I AM STUCK********************************************//
       localStorage.setItem("lat", JSON.stringify(lat));
       localStorage.setItem("lon", JSON.stringify(lon));
       localStorage.setItem("city", JSON.stringify(city));
+
+      var retrievedLat = localStorage.getItem("lat", JSON.stringify(lat));
+      var retrievedLon = localStorage.getItem("lon", JSON.stringify(lon));
+      var retrievedCity = localStorage.getItem("city", JSON.stringify(city));
+
+      console.log(retrievedLat);
+      console.log(retrievedLon);
+      console.log(retrievedCity);
+      // created local savedSearchesObject variable to save valutes in an object
+      var savedSearchesObject = {
+        lat: retrievedLat,
+        lon: retrievedLon,
+        city: retrievedCity,
+      };
+      // pushing the savedSearchesObject into the global savedSearches array variable
+      savedSearches.push(savedSearchesObject);
+      //setting the savedSearches array variable to local storage.
+      localStorage.setItem("savedSearches", JSON.stringify(savedSearches));
+
+      // ***********************************************************************//
+      //localStorage.setItem("savedSearches", JSON.stringify(savedSearches));
       // search for the api to get the current weather of the city that is searched.
       fetch(
         `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
@@ -79,7 +99,6 @@ function searchCurrentCity(city) {
           //console.log(data);
           //Created Variable to get the currentIcon api value for the current day weather condition icon.
           var currentIcon = data.weather[0].icon;
-          console.log(currentIcon);
           // Step 2: creating variable for the image URL to update according to the current Day which is the 0 data Index.
           var currentIconURL =
             "http://openweathermap.org/img/wn/" + currentIcon + ".png";
