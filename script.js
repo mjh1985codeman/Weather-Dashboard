@@ -155,16 +155,17 @@ function fiveDayForecast(forecastResponse) {
       "Wind: " + foreCastItemsArray[i].wind + " mph.";
     document.getElementById("fivedaycardhumidity" + i).innerHTML =
       "Humidity: " + foreCastItemsArray[i].humidity + "%";
-    //document.createElementById(
-    //"fivedaycardicon" + i
-    //).innerHTML =
+    //adding the icons to the 5 day forecast.
+    // saving the foreCastItemsArray index icon value to a variable
     var fiveDayWeatherIcon = foreCastItemsArray[i].icon;
     console.log(fiveDayWeatherIcon);
+    // creating variable for the image URL to update according to the fiveDayWeatherIcon Index.
     var fiveDayWeatherIconURL =
       "http://openweathermap.org/img/wn/" + fiveDayWeatherIcon + ".png";
-
-    document.getElementById("fivedaycardicon" + i).innerHTML =
-      fiveDayWeatherIconURL;
+    // created Icon HTML element variable via HTML Id.
+    var fiveDayIconEl = document.getElementById("fivedaycardicon" + i);
+    // set the image src for the fiveDayIconEl as the fiveDayWeatherIconURL.
+    fiveDayIconEl.src = fiveDayWeatherIconURL;
   }
 }
 
