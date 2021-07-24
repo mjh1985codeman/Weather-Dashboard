@@ -13,6 +13,7 @@ var savedSearches = [];
 searchButton.addEventListener("click", handleSearchInput);
 searchButton.addEventListener("click", showFiveDayForecast);
 searchButton.addEventListener("click", getNextFiveDays);
+searchButton.addEventListener("click", getSavedCities);
 
 function showFiveDayForecast() {
   fiveDayForecastContEl.removeAttribute("class", "hide");
@@ -213,13 +214,22 @@ function handleSearchInput(e) {
 
 // function to create buttons from local Storage.
 function getSavedCities() {
-  var savedCityName = localStorage.getItem("city");
-  console.log(savedCityName);
+  //var savedCityName = localStorage.getItem("city");
+  //console.log(savedCityName);
   //I'm trying this
-  var savedCityButton = document.createElement("button");
-  savedCityButton.textContent += savedCityName;
-  savedCityButton.classList.add("savedCityButtons");
-  savedCityButtonEl.appendChild(savedCityButton);
+
+  // setup a for loop to generate the savedCityButtons based on the length of the savedSearchs array in local storage.
+  var savedCityNames = localStorage.getItem("savedSearches");
+  console.log(savedCityNames);
+  console.log(savedCityNames.length);
+
+  for (var i = 0; i <= savedCityNames.length; i++) {
+    // add some kind of if statement that if the savedCityNames is Null to not error out.
+    var savedCityButton = document.createElement("button");
+    savedCityButton.textContent += savedCityNames.city;
+    savedCityButton.classList.add("savedCityButtons");
+    savedCityButtonEl.appendChild(savedCityButton);
+  }
 }
 // get the values for Saved Cities from Local Storage and create Buttons.
 window.onload = function () {
