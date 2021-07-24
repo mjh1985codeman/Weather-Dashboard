@@ -3,17 +3,17 @@ var apiKey = "74711516f5fae5b0413ec705cb27b3dc";
 var searchButton = document.getElementById("CitySearchButton");
 var currentCitySearchInputText = document.getElementById("citySearchInputText");
 var fiveDayForecastContEl = document.getElementById("five-day-forecast-cont");
-var savedCityButtonEl = document.getElementById("searched-city-buttons");
+
 var uvIndexEl = document.getElementById("current-city-uvindex");
 var nextFiveDayDates = [];
 //variable for local storage
-var savedSearches = [];
+var savedSearches = JSON.parse(localStorage.getItem("savedSearches") || "[]");
 
 //Event Listner for Search Button
 searchButton.addEventListener("click", handleSearchInput);
+searchButton.addEventListener("click", getSavedCities);
 searchButton.addEventListener("click", showFiveDayForecast);
 searchButton.addEventListener("click", getNextFiveDays);
-searchButton.addEventListener("click", getSavedCities);
 
 function showFiveDayForecast() {
   fiveDayForecastContEl.removeAttribute("class", "hide");
@@ -56,7 +56,7 @@ function searchCurrentCity(city) {
       // drills down to get the city and state name.
       document.getElementById("current-city-name").innerHTML =
         " " + data[0].name;
-      //console.log(data[0].state);
+
       document.getElementById("current-city-state").innerHTML =
         " " + data[0].state;
       // created lat and lon variables.
@@ -73,9 +73,6 @@ function searchCurrentCity(city) {
       var retrievedLon = localStorage.getItem("lon", JSON.stringify(lon));
       var retrievedCity = localStorage.getItem("city", JSON.stringify(city));
 
-      console.log(retrievedLat);
-      console.log(retrievedLon);
-      console.log(retrievedCity);
       // created local savedSearchesObject variable to save valutes in an object
       var savedSearchesObject = {
         lat: retrievedLat,
@@ -88,7 +85,6 @@ function searchCurrentCity(city) {
       localStorage.setItem("savedSearches", JSON.stringify(savedSearches));
 
       // ***********************************************************************//
-      //localStorage.setItem("savedSearches", JSON.stringify(savedSearches));
       // search for the api to get the current weather of the city that is searched.
       fetch(
         `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
@@ -130,7 +126,6 @@ function searchCurrentCity(city) {
           return response.json();
         })
         .then(function (data) {
-          //console.log(data.current.uvi);
           document.getElementById("current-city-uvindex").innerHTML =
             "UV Index: " + data.current.uvi;
           // if else statemt to color code uv index.
@@ -180,7 +175,6 @@ function fiveDayForecast(forecastResponse) {
 
   // Created For Loop to iterate over the foreCastItemsArray to get each day(s) value(s)
   for (var i = 0; i < foreCastItemsArray.length; i++) {
-    //console.log(card);
     document.getElementById("fivedaycardtemp" + i).innerHTML =
       "Temp: " + foreCastItemsArray[i].temp + " °F";
     document.getElementById("fivedaycardwind" + i).innerHTML =
@@ -214,21 +208,26 @@ function handleSearchInput(e) {
 
 // function to create buttons from local Storage.
 function getSavedCities() {
-  //var savedCityName = localStorage.getItem("city");
-  //console.log(savedCityName);
-  //I'm trying this
+  var savedCityName = localStorage.getItem("savedSearches");
+  console.log(savedCityName);
+  $("#searched-city-buttons").empty();
 
-  // setup a for loop to generate the savedCityButtons based on the length of the savedSearchs array in local storage.
-  var savedCityNames = localStorage.getItem("savedSearches");
+  var savedCityNames = JSON.parse(localStorage.getItem("savedSearches"));
   console.log(savedCityNames);
   console.log(savedCityNames.length);
-
-  for (var i = 0; i <= savedCityNames.length; i++) {
-    // add some kind of if statement that if the savedCityNames is Null to not error out.
-    var savedCityButton = document.createElement("button");
-    savedCityButton.textContent += savedCityNames.city;
-    savedCityButton.classList.add("savedCityButtons");
-    savedCityButtonEl.appendChild(savedCityButton);
+  // setup a for loop to generate the savedCityButtons based on the length of the savedSearchs array in local storage.
+  for (var i = 0; i < savedCityNames.length; i++) {
+    console.log(savedCityNames[i].city);
+    var button = $("<button>");
+    button.addClass("savedCityButtons");
+    button.text(savedCityNames[i].city);
+    $("#searched-city-buttons").append(button);
+    //Event Listeners as Buttons are generated:
+    var savedCityButtonEl = document.getElementById("searched-city-buttons");
+    //savedCityButtonEl.addEventListener("click", handleSearchInput);
+    //savedCityButtonEl.addEventListener("click", getSavedCities);
+    savedCityButtonEl.addEventListener("click", showFiveDayForecast);
+    savedCityButtonEl.addEventListener("click", getNextFiveDays);
   }
 }
 // get the values for Saved Cities from Local Storage and create Buttons.
