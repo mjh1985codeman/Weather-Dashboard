@@ -188,15 +188,17 @@ function handleSearchInput(e) {
   e.preventDefault();
   var searchedCity = currentCitySearchInputText.value.trim();
   searchCurrentCity(searchedCity);
+
   //console.log(searchedCity);
 }
 
 // function to create buttons from local Storage.
 function getSavedCities() {
-  var savedCityName = JSON.parse(localStorage.getItem("city"));
+  var savedCityName = localStorage.getItem("city");
   console.log(savedCityName);
+  //I'm trying this
   var savedCityButton = document.createElement("button");
-  savedCityButton.textContent = savedCityName;
+  savedCityButton.textContent += savedCityName;
   savedCityButton.classList.add("savedCityButtons");
   savedCityButtonEl.appendChild(savedCityButton);
 }
