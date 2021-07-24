@@ -63,6 +63,7 @@ function searchCurrentCity(city) {
       // created lat and lon variables.
       var lat = data[0].lat;
       var lon = data[0].lon;
+
       // save the lat, lon and city of the searched city name in local storage.
       localStorage.setItem("lat", JSON.stringify(lat));
       localStorage.setItem("lon", JSON.stringify(lon));
@@ -76,6 +77,18 @@ function searchCurrentCity(city) {
         })
         .then(function (data) {
           //console.log(data);
+          //Created Variable to get the currentIcon api value for the current day weather condition icon.
+          var currentIcon = data.weather[0].icon;
+          console.log(currentIcon);
+          // Step 2: creating variable for the image URL to update according to the current Day which is the 0 data Index.
+          var currentIconURL =
+            "http://openweathermap.org/img/wn/" + currentIcon + ".png";
+          // Step 3: created Icon HTML element variable via HTML Id.
+          var currentDayIconEl = document.getElementById("current-city-icon");
+          // Step 4: set the image src for the currentDayIconEl as the currentIconURL.
+          currentDayIconEl.src = currentIconURL;
+          // Step 5: remove the "hide class attribute" so that the icon shows when the city searched.
+          currentDayIconEl.removeAttribute("class", "hide");
           //current Temp
           //console.log(data.main.temp);
           document.getElementById("current-city-temp").innerHTML =
@@ -145,7 +158,6 @@ function fiveDayForecast(forecastResponse) {
 
   //icon variable.
 
-  console.log(foreCastItemsArray);
   // Created For Loop to iterate over the foreCastItemsArray to get each day(s) value(s)
   for (var i = 0; i < foreCastItemsArray.length; i++) {
     //console.log(card);
@@ -156,15 +168,14 @@ function fiveDayForecast(forecastResponse) {
     document.getElementById("fivedaycardhumidity" + i).innerHTML =
       "Humidity: " + foreCastItemsArray[i].humidity + "%";
     //adding the icons to the 5 day forecast.
-    // saving the foreCastItemsArray index icon value to a variable
+    // Step 1: saving the foreCastItemsArray index icon value to a variable
     var fiveDayWeatherIcon = foreCastItemsArray[i].icon;
-    console.log(fiveDayWeatherIcon);
-    // creating variable for the image URL to update according to the fiveDayWeatherIcon Index.
+    // Step 2: creating variable for the image URL to update according to the fiveDayWeatherIcon Index.
     var fiveDayWeatherIconURL =
       "http://openweathermap.org/img/wn/" + fiveDayWeatherIcon + ".png";
-    // created Icon HTML element variable via HTML Id.
+    // Step 3: created Icon HTML element variable via HTML Id.
     var fiveDayIconEl = document.getElementById("fivedaycardicon" + i);
-    // set the image src for the fiveDayIconEl as the fiveDayWeatherIconURL.
+    // Step 4: set the image src for the fiveDayIconEl as the fiveDayWeatherIconURL.
     fiveDayIconEl.src = fiveDayWeatherIconURL;
   }
 }
