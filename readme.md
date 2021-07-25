@@ -19,7 +19,8 @@ WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city
 
 # Deployed Screenshot:
-
+[![deployed-WDSS.jpg](https://i.postimg.cc/2S0S3nKg/deployed-WDSS.jpg)](https://postimg.cc/hX7B5Qg0)
 # Deployed URL: 
-
+https://mjh1985codeman.github.io/Weather-Dashboard/
 # GitHub Repo URL:
+https://github.com/mjh1985codeman/Weather-Dashboard
