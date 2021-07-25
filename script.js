@@ -186,7 +186,7 @@ function fiveDayForecast(forecastResponse) {
     var fiveDayWeatherIcon = foreCastItemsArray[i].icon;
     // Step 2: creating variable for the image URL to update according to the fiveDayWeatherIcon Index.
     var fiveDayWeatherIconURL =
-      "http://openweathermap.org/img/wn/" + fiveDayWeatherIcon + ".png";
+      "https://openweathermap.org/img/wn/" + fiveDayWeatherIcon + ".png";
     // Step 3: created Icon HTML element variable via HTML Id.
     var fiveDayIconEl = document.getElementById("fivedaycardicon" + i);
     // Step 4: set the image src for the fiveDayIconEl as the fiveDayWeatherIconURL.
