@@ -240,13 +240,10 @@ window.onload = function () {
   getSavedCities();
 };
 
-// Setup function that mirrors "Search Current City". . .but call it "displayCityAgain" and add the elements
-// minus what involves setting things back to local storage because that should only happen
-// when searching the city, not selecting the same city again.
-
 function displayCityAgain(city) {
   //console.log("Test" + city);
   fiveDayForecastContEl.removeAttribute("class", "hide");
+  getNextFiveDays();
   fetch(
     `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`
   )
@@ -381,6 +378,4 @@ function displayCityAgain(city) {
           }
         });
     });
-  //********************************************************************************* */
-  //**********************This is where things broke ***********************************/
 }
