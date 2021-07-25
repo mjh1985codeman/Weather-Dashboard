@@ -246,6 +246,7 @@ window.onload = function () {
 
 function displayCityAgain(city) {
   //console.log("Test" + city);
+  fiveDayForecastContEl.removeAttribute("class", "hide");
   fetch(
     `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`
   )
@@ -332,52 +333,54 @@ function displayCityAgain(city) {
         })
         .then(function (data) {
           savedFiveDayForecast(data);
-          //console.log(data);
+          console.log(data);
+          //savedFiveDayForecast(data); ///WHAT DOES THIS DO?!
+          function savedFiveDayForecast(data) {
+            //change everything with forecastResponse to "data"
+            console.log(data);
+            //variable to display the forecastResponse list which had 40 items.
+            var forecastArray = data.list;
+            // for loop to start at index 4 (Noon hour of each day) and for the length of the array (40 items)
+            // increment by 8 to get the 12th hour conditions for each day of the 5 day forecast.
+            var foreCastItemsArray = [];
+            for (var i = 4; i < forecastArray.length; i += 8) {
+              var foreCastItem = {
+                temp: forecastArray[i].main.temp,
+                wind: forecastArray[i].wind.speed,
+                humidity: forecastArray[i].main.humidity,
+                icon: forecastArray[i].weather[0].icon,
+              };
+              foreCastItemsArray.push(foreCastItem);
+            }
+
+            //icon variable.
+
+            // Created For Loop to iterate over the foreCastItemsArray to get each day(s) value(s)
+            for (var i = 0; i < foreCastItemsArray.length; i++) {
+              document.getElementById("fivedaycardtemp" + i).innerHTML =
+                "Temp: " + foreCastItemsArray[i].temp + " °F";
+              document.getElementById("fivedaycardwind" + i).innerHTML =
+                "Wind: " + foreCastItemsArray[i].wind + " mph.";
+              document.getElementById("fivedaycardhumidity" + i).innerHTML =
+                "Humidity: " + foreCastItemsArray[i].humidity + "%";
+              //adding the icons to the 5 day forecast.
+              // Step 1: saving the foreCastItemsArray index icon value to a variable
+              var fiveDayWeatherIcon = foreCastItemsArray[i].icon;
+              // Step 2: creating variable for the image URL to update according to the fiveDayWeatherIcon Index.
+              var fiveDayWeatherIconURL =
+                "http://openweathermap.org/img/wn/" +
+                fiveDayWeatherIcon +
+                ".png";
+              // Step 3: created Icon HTML element variable via HTML Id.
+              var fiveDayIconEl = document.getElementById(
+                "fivedaycardicon" + i
+              );
+              // Step 4: set the image src for the fiveDayIconEl as the fiveDayWeatherIconURL.
+              fiveDayIconEl.src = fiveDayWeatherIconURL;
+            }
+          }
         });
-      savedFiveDayForecast(); ///WHAT DOES THIS DO?!
     });
   //********************************************************************************* */
   //**********************This is where things broke ***********************************/
-  //fiveDayForecast();
-  // get the five day forecast again.
-  function savedFiveDayForecast(data) {
-    //change everything with forecastResponse to "data"
-    console.log(data);
-    //variable to display the forecastResponse list which had 40 items.
-    var forecastArray = data.list;
-    // for loop to start at index 4 (Noon hour of each day) and for the length of the array (40 items)
-    // increment by 8 to get the 12th hour conditions for each day of the 5 day forecast.
-    var foreCastItemsArray = [];
-    for (var i = 4; i < forecastArray.length; i += 8) {
-      var foreCastItem = {
-        temp: forecastArray[i].main.temp,
-        wind: forecastArray[i].wind.speed,
-        humidity: forecastArray[i].main.humidity,
-        icon: forecastArray[i].weather[0].icon,
-      };
-      foreCastItemsArray.push(foreCastItem);
-    }
-
-    //icon variable.
-
-    // Created For Loop to iterate over the foreCastItemsArray to get each day(s) value(s)
-    for (var i = 0; i < foreCastItemsArray.length; i++) {
-      document.getElementById("fivedaycardtemp" + i).innerHTML =
-        "Temp: " + foreCastItemsArray[i].temp + " °F";
-      document.getElementById("fivedaycardwind" + i).innerHTML =
-        "Wind: " + foreCastItemsArray[i].wind + " mph.";
-      document.getElementById("fivedaycardhumidity" + i).innerHTML =
-        "Humidity: " + foreCastItemsArray[i].humidity + "%";
-      //adding the icons to the 5 day forecast.
-      // Step 1: saving the foreCastItemsArray index icon value to a variable
-      var fiveDayWeatherIcon = foreCastItemsArray[i].icon;
-      // Step 2: creating variable for the image URL to update according to the fiveDayWeatherIcon Index.
-      var fiveDayWeatherIconURL =
-        "http://openweathermap.org/img/wn/" + fiveDayWeatherIcon + ".png";
-      // Step 3: created Icon HTML element variable via HTML Id.
-      var fiveDayIconEl = document.getElementById("fivedaycardicon" + i);
-      // Step 4: set the image src for the fiveDayIconEl as the fiveDayWeatherIconURL.
-      fiveDayIconEl.src = fiveDayWeatherIconURL;
-    }
-  }
 }
