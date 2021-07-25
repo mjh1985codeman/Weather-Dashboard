@@ -47,7 +47,7 @@ function getNextFiveDays() {
 function searchCurrentCity(city) {
   console.log("Test" + city);
   fetch(
-    `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`
+    `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`
   )
     .then(function (response) {
       return response.json();
@@ -86,7 +86,7 @@ function searchCurrentCity(city) {
       // ***********************************************************************//
       // search for the api to get the current weather of the city that is searched.
       fetch(
-        `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
       )
         .then(function (response) {
           return response.json();
@@ -97,7 +97,7 @@ function searchCurrentCity(city) {
           var currentIcon = data.weather[0].icon;
           // Step 2: creating variable for the image URL to update according to the current Day which is the 0 data Index.
           var currentIconURL =
-            "http://openweathermap.org/img/wn/" + currentIcon + ".png";
+            "https://openweathermap.org/img/wn/" + currentIcon + ".png";
           // Step 3: created Icon HTML element variable via HTML Id.
           var currentDayIconEl = document.getElementById("current-city-icon");
           // Step 4: set the image src for the currentDayIconEl as the currentIconURL.
@@ -245,7 +245,7 @@ function displayCityAgain(city) {
   fiveDayForecastContEl.removeAttribute("class", "hide");
   getNextFiveDays();
   fetch(
-    `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`
+    `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`
   )
     .then(function (response) {
       return response.json();
@@ -269,7 +269,7 @@ function displayCityAgain(city) {
       }
 
       fetch(
-        `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
       )
         .then(function (response) {
           return response.json();
@@ -279,7 +279,7 @@ function displayCityAgain(city) {
           var currentIcon = data.weather[0].icon;
           // Step 2: creating variable for the image URL to update according to the current Day which is the 0 data Index.
           var currentIconURL =
-            "http://openweathermap.org/img/wn/" + currentIcon + ".png";
+            "https://openweathermap.org/img/wn/" + currentIcon + ".png";
           // Step 3: created Icon HTML element variable via HTML Id.
           var currentDayIconEl = document.getElementById("current-city-icon");
           // Step 4: set the image src for the currentDayIconEl as the currentIconURL.
@@ -365,7 +365,7 @@ function displayCityAgain(city) {
               var fiveDayWeatherIcon = foreCastItemsArray[i].icon;
               // Step 2: creating variable for the image URL to update according to the fiveDayWeatherIcon Index.
               var fiveDayWeatherIconURL =
-                "http://openweathermap.org/img/wn/" +
+                "https://openweathermap.org/img/wn/" +
                 fiveDayWeatherIcon +
                 ".png";
               // Step 3: created Icon HTML element variable via HTML Id.
